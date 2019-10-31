@@ -18,16 +18,6 @@ AHKdoc:
     Run, https://wyagd001.github.io/zh-cn/docs/AutoHotkey.htm
 return
 
-Sjupyter:
-~^!j::  ; Ctrl+Alt+j Server Jupyter Notebook
-    Run, http://118.25.12.63:8888/
-return
-
-jupyter:
-~+!j::  ; Shift+Alt+j Jupyter Notebook
-    Run, E:\Codes\Jupyter.bat
-return
-
 Linuxde:
 ~!l::
     Run, http://man.linuxde.net/
@@ -38,19 +28,26 @@ Githubio:
     Run, https://randool.github.io/
 return
 
-Notepad:
+Sublime:
 ~^!n::
-	Run, F:\Notepad++/notepad++.exe
+    Run, F:\\Sublime Text3\\sublime_text.exe
 Return
+
+;;;;;;;文件夹;;;;;;;;
 
 Working:
 ~^!w::
     Run, E:\HNU\工作文件
 return
 
+Mysite:
+~^!b::  ; Ctrl+Alt+b 写博客的地址
+    Run, E:\MySite\source\_posts
+return
+
 Sophomore:
 ~^!c::  ; Ctrl+Alt+c 当前工作目录
-    Run, E:\HNU\semester\大三下
+    Run, E:\HNU\semester\大四上
 return
 
 ~^!v:: ; Ctrl+Alt+v 研究生

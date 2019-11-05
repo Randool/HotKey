@@ -10,23 +10,23 @@
     ;ToolTip, %doc%
     ;Sleep, 2000
     ;ToolTip,
-return
+Return
 
 ;;;;;;;超链接;;;;;;;;
 AHKdoc:
 ~+!a::  ; Shift+Alt+a AHK中文文档
     Run, https://wyagd001.github.io/zh-cn/docs/AutoHotkey.htm
-return
+Return
 
 Linuxde:
 ~!l::
     Run, http://man.linuxde.net/
-return
+Return
 
 Githubio:
 ~^!g::  ; Ctrl+Alt+g Gayhub网站
     Run, https://randool.github.io/
-return
+Return
 
 Sublime:
 ~^!n::
@@ -38,21 +38,21 @@ Return
 Working:
 ~^!w::
     Run, E:\HNU\工作文件
-return
+Return
 
 Mysite:
 ~^!b::  ; Ctrl + Alt + b 写博客的地址
     Run, E:\MySite\source\_posts
-return
+Return
 
 MyFocus:
 ~^!c::  ; Ctrl + Alt + c    当前工作目录
     Run, E:\HNU\semester\大四上
-return
+Return
 
 ~^!v:: ; Ctrl + Alt + v     研究生
     Run, E:\HNU\semester\postgraduate
-return
+Return
 
 CmdInCurrentDir:
 ~^!t::  ; Ctrl + Alt + t    快速打开cmd，并进入bash模式（需要使用Cygwin）
@@ -68,6 +68,9 @@ CmdInCurrentDir:
         findpos := RegExMatch(cb, "i)^\s*[a-g]:\\")
         If (%findpos% != 0)
         {
+            findpos := InStr(cb, ".")
+            If (%findpos% != 0)
+                Return
             newcmd := "cd " StrReplace(cb, "\", "/")
             ; MsgBox, %newcmd%
             SendAsc(newcmd)
@@ -89,37 +92,37 @@ SendAsc(str) {
 WinFocus:
 ~^!f::  ; Ctrl + Alt + f    Windows聚焦
     Run, %localappdata%\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets
-return
+Return
 
 PDF:
 ~^!p::  ; Ctrl + Alt + p    PDF文件夹
     Run, E:\PDF
-return
+Return
 
 Code:
 ~+!c::  ; Shift + Alt + c   Code文件夹
     Run, E:\Codes
-return
+Return
 
 Paper:
 ~+!p::   ; Shift + Alt + p  Paper文件夹
     Run, E:\PDF\paper
-return
+Return
 
 Tmp:
 ~+!t::  ; Shift + Alt + t   临时文件夹
     Run, D:\tmp
-return
+Return
 
 FileRecv:
 ~^!r::  ; Ctrl+Alt+r FileRecv文件夹
     Run, C:\Users\dlf43\Documents\Tencent Files\1021924274\FileRecv
-return
+Return
 
 Xshell:
 ~^!x::
     Run, F:\Xshell 6\Xshell.exe
-return
+Return
 
 ;;;;;;;拾色器+计时器;;;;;;;;
 ;MsgBox, , 说明, Alt+c 拾取颜色`nAlt+t 打开计时器`nAlt+d 输出当前日期`nAlt+e 退出应用 , 5
@@ -135,12 +138,12 @@ WinSet, TransColor, %CustomColor% 150
 SetTimer, UpdateOSD, 80
 Gosub, UpdateOSD            ; 立即进行第一此更新而不等待计时器.
 Gui, Show, x250 y970 NoActivate  ; NoActivate 让当前活动窗口继续保持活动状态.
-return
+Return
 
 UpdateOSD:
     color := getColor()
     GuiControl,, MyText, %color%
-return
+Return
 
 ColorElf:
 ~!c::
@@ -189,5 +192,5 @@ getHelp()
     doc .= "Shift+Alt+a     AHK中文文档`nCtrl+Alt+f     Windows聚焦`nCtrl+Alt+g     GitHub个人网站"
     doc .= "Shift+Alt+j     Jupyter Notebook`nCtrl+Alt+j     Server Jupyter Notebook`nCtrl+Alt+p     PDF文件夹"
     doc .= "Ctrl+Alt+r     FileRecv文件夹`nAlt+e     退出应用"
-    return doc
+    Return doc
 }

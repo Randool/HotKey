@@ -18,10 +18,10 @@ AHKdoc:
     Run, https://wyagd001.github.io/zh-cn/docs/AutoHotkey.htm
 return
 
-Linuxde:
-~!l::
-    Run, http://man.linuxde.net/
-return
+; Linuxde:
+; ~!l::
+;     Run, http://man.linuxde.net/
+; return
 
 Githubio:
 ~^!g::  ; Ctrl+Alt+g Gayhub网站
@@ -41,37 +41,74 @@ Working:
 return
 
 Mysite:
-~^!b::  ; Ctrl+Alt+b 写博客的地址
+~^!b::  ; Ctrl + Alt + b 写博客的地址
     Run, E:\MySite\source\_posts
 return
 
-Sophomore:
-~^!c::  ; Ctrl+Alt+c 当前工作目录
+MyFocus:
+~^!c::  ; Ctrl + Alt + c    当前工作目录
     Run, E:\HNU\semester\大四上
 return
 
-~^!v:: ; Ctrl+Alt+v 研究生
+~^!v:: ; Ctrl + Alt + v     研究生
     Run, E:\HNU\semester\postgraduate
 return
 
-Cmd:
-~^!t::  ; Ctrl+Alt+t cmd
-    Run, C:\WINDOWS\system32\cmd.exe
+CmdInCurrentDir:
+~^!t::  ; Ctrl + Alt + t    快速打开cmd，并进入bash模式（需要使用Cygwin）
+    Run, F:\cygwin64\bin\mintty.exe
+    
+    wintitle := "ahk_class mintty ahk_exe mintty.exe"
+    WinActivate, %wintitle%
+    WinWaitActive, %wintitle%
+    
+    IfWinActive, %wintitle%
+    {
+        cb := Clipboard
+        findpos := RegExMatch(cb, "i)^\s*[a-g]:\\")
+        If (%findpos% != 0)
+        {
+            newcmd := "cd " StrReplace(cb, "\", "/")
+            ; MsgBox, %newcmd%
+            SendAsc(newcmd)
+            Send {Enter}
+        }
+    }
 Return
 
+SendAsc(str) {
+    Loop, Parse, str
+    {
+        If ( Asc(A_LoopField) <= 255 ) ; 如果字符编码在255之内
+            SendInput, % "{Asc " . Asc(A_LoopField) . "}" ; 发送Asc字符
+        Else
+            SendInput, % A_LoopField ; 直接发送Unicode字符
+    }
+}
+
 WinFocus:
-~^!f::  ; Ctrl+Alt+f Windows聚焦
+~^!f::  ; Ctrl + Alt + f    Windows聚焦
     Run, %localappdata%\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets
 return
 
 PDF:
-~^!p::  ; Ctrl+Alt+p PDF文件夹
+~^!p::  ; Ctrl + Alt + p    PDF文件夹
     Run, E:\PDF
 return
 
+Code:
+~+!c::  ; Shift + Alt + c   Code文件夹
+    Run, E:\Codes
+return
+
 Paper:
-~+!p::   ; Shift+Alt+p Paper文件夹
+~+!p::   ; Shift + Alt + p  Paper文件夹
     Run, E:\PDF\paper
+return
+
+Tmp:
+~+!t::  ; Shift + Alt + t   临时文件夹
+    Run, D:\tmp
 return
 
 FileRecv:

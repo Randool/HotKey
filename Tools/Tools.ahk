@@ -56,9 +56,12 @@ Return
 
 CmdInCurrentDir:
 ~^!t::  ; Ctrl + Alt + t    快速打开cmd，并进入bash模式（需要使用Cygwin）
-    Run, F:\cygwin64\bin\mintty.exe
+    ; Run, F:\cygwin64\bin\mintty.exe
+    ; wintitle := "/cygdrive/e/Codes/AHK/Tools ahk_class mintty ahk_exe mintty.exe"
     
-    wintitle := "/cygdrive/e/Codes/AHK/Tools ahk_class mintty ahk_exe mintty.exe"
+    Run, C:\Windows\System32\cmd.exe
+    wintitle := "C:\Windows\System32\cmd.exe ahk_class ConsoleWindowClass ahk_exe cmd.exe"
+    
     WinActivate, %wintitle%
     WinWaitActive, %wintitle%
     
@@ -71,6 +74,7 @@ CmdInCurrentDir:
             findpos := InStr(cb, ".")
             If (%findpos% != 0)
                 Return
+            Send, bash`n
             newcmd := "cd " StrReplace(cb, "\", "/")
             ; MsgBox, %newcmd%
             SendAsc(newcmd)

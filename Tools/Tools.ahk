@@ -18,10 +18,10 @@ AHKdoc:
     Run, https://wyagd001.github.io/zh-cn/docs/AutoHotkey.htm
 return
 
-; Linuxde:
-; ~!l::
-;     Run, http://man.linuxde.net/
-; return
+Linuxde:
+~!l::
+    Run, http://man.linuxde.net/
+return
 
 Githubio:
 ~^!g::  ; Ctrl+Alt+g Gayhub网站
@@ -58,7 +58,7 @@ CmdInCurrentDir:
 ~^!t::  ; Ctrl + Alt + t    快速打开cmd，并进入bash模式（需要使用Cygwin）
     Run, F:\cygwin64\bin\mintty.exe
     
-    wintitle := "ahk_class mintty ahk_exe mintty.exe"
+    wintitle := "/cygdrive/e/Codes/AHK/Tools ahk_class mintty ahk_exe mintty.exe"
     WinActivate, %wintitle%
     WinWaitActive, %wintitle%
     
